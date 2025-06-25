@@ -16,12 +16,13 @@ translator=Translator()
 reader=easyocr.Reader(['en'],gpu=True)
 camera=cv2.VideoCapture(0)
 last_ocr_time = 0
-ocr_interval = 5
-text_display_duration = 3  # Show OCR results for 3 seconds
+ocr_interval = 3
+text_display_duration = 1
 text_display_start_time = 0
 text=[]
 while True:
     ret,image=camera.read()
+    image = cv2.resize(image, (680, 420))
     if not ret:
         break
     
@@ -42,9 +43,10 @@ while True:
                 translated_text = translate.text
             except:
                 translated_text = lines
-            cv2.polylines(image, [np.array(pts)], isClosed=True, color=(0, 255, 0), thickness=1)
+            
             x, y = pts[0]
             draw.text((x, y - 25), translated_text, font=font, fill=(255, 0, 0))
+            draw.line(pts + [pts[0]], fill=(0, 255, 0), width=2)
             print(lines)
             print(translated_text)
 
