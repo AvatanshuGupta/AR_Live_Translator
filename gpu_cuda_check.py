@@ -1,4 +1,7 @@
 import torch
+
+#Testing gpu and cuda
+
 print("CUDA Available:", torch.cuda.is_available())
 print("Torch Version:", torch.__version__)
 if torch.cuda.is_available():

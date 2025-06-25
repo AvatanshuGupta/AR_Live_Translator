@@ -5,13 +5,14 @@ import numpy as np
 import time
 from PIL import ImageFont, ImageDraw, Image
 
+#importing font to get proper hindi text
 font_path = "NotoSansDevanagari-VariableFont_wdth,wght.ttf"
 font = ImageFont.truetype(font_path, 20)
 
-
-
+#initializing translator
 translator=Translator()
 
+#initiallizing reader,camera and constants
 
 reader=easyocr.Reader(['en'],gpu=True)
 camera=cv2.VideoCapture(0)
@@ -20,6 +21,8 @@ ocr_interval = 3
 text_display_duration = 1
 text_display_start_time = 0
 text=[]
+
+#Main loop
 while True:
     ret,image=camera.read()
     image = cv2.resize(image, (680, 420))
@@ -50,14 +53,10 @@ while True:
             print(lines)
             print(translated_text)
 
-        
-        
-        # Convert back PIL image (with Hindi text) to OpenCV format
     image = cv2.cvtColor(np.array(image_pil), cv2.COLOR_RGB2BGR)
-    cv2.imshow("AR_TRANSLATOR", image)
-
-
+    cv2.imshow("AR_TRANSLATOR", image) 
     key=cv2.waitKey(1)
+    #press esc to close the window
     if key==27:
         break
 

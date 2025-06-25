@@ -1,5 +1,7 @@
 from googletrans import Translator
 
+#Testing Translator
+
 translator = Translator()
 
 text = "How are you? what is your name"
